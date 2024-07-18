@@ -1,0 +1,194 @@
+.index-container{
+    background-color: #17202A;
+    min-height: 100%;
+    padding: 2rem;
+}
+.guitar-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 4rem;
+}
+.guitar-container .container-unique-guitar{
+    margin: 1rem;
+    padding: 1.5rem;
+    border-radius: 15%;
+    box-shadow: white;
+}
+.guitar-container .box{
+    position: relative;
+    overflow: hidden;
+}
+.guitar-container .box img{
+    height: 25rem;
+    object-fit: cover;
+}
+.left-arrow, .right-arrow{
+    color: white;
+}
+.guitar-container .box img:hover{
+    transform: scale(1.1);
+    transition: 0.5s;
+}
+.guitar-container .box figcaption{
+    position: absolute;
+    top: 4rem;
+    left: 0.5rem;
+    height: auto;
+    width: 7rem;
+    font-weight: 400;
+    font-size: 1.4rem;
+    border-radius: 1rem;
+    background-color: #505c5b;
+    padding: 0.5rem;
+    opacity: 80%;
+}
+.guitar-container .box .btn-fav{
+    position: absolute;
+    bottom: 1rem;
+    right: 2rem;
+    background-color: transparent;
+    border: none;
+}
+.guitar-container .box .btn-fav:hover{
+    cursor: pointer;
+}
+.guitar-container .box .btn-fav img{
+    height: auto;
+    width: auto;
+}
+.guitar-container .box:hover figcaption{
+    font-weight: bold;
+    background:  #f4d03f;
+    color:  #1C2833;
+}
+
+.guitar-container .box-element {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.guitar-container .btn{
+    display: inline-block;
+    background-color: #2471A3;
+    padding: 1.6rem 2rem;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.8rem 0 #154360, inset -0.5rem 0 1rem rgba(255, 255, 255, 0.2);
+    transition: all 0.3s;
+    cursor: pointer;
+}
+.guitar-container .btn:active{
+    transform: translateY(0.4rem);
+    box-shadow: 0 0.4rem 0 #154360;
+}
+.guitar-container .lnk-guitar{
+    display: inline-block;
+    background-color: #fd5d5d;
+    padding: 1.6rem 3.8rem;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.8rem 0 #cf2b2b, inset -0.5rem 0 1rem rgba(255, 255, 255, 0.2);
+    transition: all 0.3s;
+    cursor: pointer;
+}
+.guitar-container .lnk-guitar:active{
+    transform: translateY(0.4rem);
+    box-shadow: 0 0.4rem 0 #cf2b2b;
+}
+/* ------------------------------------------------------------------ Para los filtros --------------------------------------------------------------  */
+.filter-guitars, .filter-guitars ul{
+    list-style: none;
+}
+/* Para cambiar apariencia del checkbox */
+.container-filter{
+    font-size: 1.6rem;
+    font-weight: bold;
+    /* background-color: #2C3E50; */
+}
+.container-filter .title-filter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container-filter .all-filter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container-filter .options_brands{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.container-filter .cb{
+    display: none;
+}
+
+.label-switch{
+    position: relative;
+    display: inline-block;
+    width: 4rem;
+    height: 2rem;
+    margin: 1rem;
+    border: 0.2rem solid white;
+    border-radius: 10rem;
+    cursor: pointer;
+}
+.container-filter .cb:checked~ .label-switch{
+    background-color: #61A0FF;
+}
+.container-filter .list_model .cb:checked~ .label-switch{
+    background-color: #E74C3C;
+}
+.label-switch:after{
+    position: absolute;
+    content: '';
+    width: 1.2rem;
+    height: 1.2rem;
+    background-color: #fff;
+    border-radius: 10rem;
+    top: 0.2rem;
+    left: 0.3rem;
+    transition: 0.3s;
+}
+.container-filter .cb:checked~ .label-switch:after{
+    left: 2.3rem;
+}
+.list-brand{
+    background-color: #34495E;
+    box-shadow: 0.5rem 0.5rem 0.2rem 0.2rem rgb(10, 16, 8);
+    border-radius: 1rem;
+    padding: 1rem;
+    margin-top: 3rem;
+    margin-left: 3rem;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 50rem;
+    min-width: 32rem;
+    height: max-content;
+}
+
+.options_models{
+    padding: 1.5rem;
+    grid-column: span 2;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(2, 1fr);
+    
+}
+.list_model{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}

@@ -1,0 +1,50 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+    
+    <section class="container-fav">
+
+        <table class="table-articles">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Item</th>
+                    <th>Price</th>
+                    <th>Options</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in fav_guitars %}
+                <tr>
+                    <td><img class="row-image" src="{{ item.images.first.imageURL }}"></td>
+                    <td class="name-item"><p>{{ item.name_guitar }}</p></td>
+                    <td>${{item.price|floatformat:2}}</td>
+                    <td>
+                        <a  
+                        class="btn-fav btn-favs" data-action="add-fav" data-product="{{ item.id_guitar }}" data-value="true"
+                        href="{% url 'guitars:favorites' %}"
+                        >
+                            Remove Favorites
+                        </a> <br>
+                        <a  
+                        data-product="{{ item.id_guitar }}" data-action="add"
+                        class="btn btn-favs btn-outline-secondary add-btn update-cart"
+                        >
+                            Add to cart
+                        </a> <br>
+                        <a  
+                        class="btn-favs" 
+                        href="{% url 'guitars:detail_guitar' item.id_guitar %}"
+                        >
+                            View Details
+                        </a>
+                    </td>
+                </tr>
+            {%endfor%}
+            </tbody>
+        </table>
+    </section>
+    <script>
+        document.cookie = 'fav=' + JSON.stringify(fav) + ";domain=;path=/";
+    </script>
+{% endblock content %}

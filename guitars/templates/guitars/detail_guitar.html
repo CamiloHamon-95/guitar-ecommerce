@@ -1,0 +1,111 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<section class="detail_guitar_container">
+    <div class="buttons-detail-guitar">
+
+		<a  
+		class="btn btn-index" 
+		href="{% url 'guitars:index' %}"
+		>
+			&#x2190; Continue Shopping
+		</a>
+		<button 
+            data-product="{{ guitar.id_guitar }}" 
+            data-action="add" 
+            class="btn btn-outline-secondary add-btn update-cart"
+        >
+            Add to Cart
+        </button>
+	</div>
+    <div class="title">
+        <p>{{ guitar.name_guitar }}</p>
+    </div>
+    <div class="collage">
+
+        
+        {% for myimage in guitar.images.all %}
+            <div class="item-carrusel" id="figure-0{{ forloop.counter }}">
+                <figure>
+                    <img src="{{ myimage.imageURL }}" alt="Imagen {{ forloop.counter }}">
+                    
+                </figure>
+                <div class="navigation-arrow">
+                    {% if forloop.counter == 1 %}
+                        <a href="#figure-0{{ guitar.images.all|length }}">
+                            <img class="left-arrow" src="{% static 'guitars/images/arrow-left.png' %}" alt="left-arrow">
+                        </a>
+                        <a href="#figure-0{{ forloop.counter|add:'1' }}">
+                            <img class="right-arrow" src="{% static 'guitars/images/arrow-right.png' %}" alt="right-arrow">
+                        </a>
+                    {% elif forloop.counter == guitar.images.all|length %}
+                        <a href="#figure-0{{ forloop.counter|add:'-1' }}">
+                            <img class="left-arrow" src="{% static 'guitars/images/arrow-left.png' %}" alt="left-arrow">
+                        </a>
+                        <a href="#figure-01">
+                            <img class="right-arrow" src="{% static 'guitars/images/arrow-right.png' %}" alt="right-arrow">
+                        </a>
+                    {% else %}
+                        <a href="#figure-0{{ forloop.counter|add:'-1' }}">
+                            <img class="left-arrow" src="{% static 'guitars/images/arrow-left.png' %}" alt="left-arrow">
+                        </a>
+                        <a href="#figure-0{{ forloop.counter|add:'1' }}">
+                            <img class="right-arrow" src="{% static 'guitars/images/arrow-right.png' %}" alt="right-arrow">
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div  class="features">
+        <div class="title">
+            <p>Caracteristicas principales</p>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Brand</td>
+                    <td>{{ guitar.specs.name_brand }}</td>
+                </tr>
+                <tr>
+                    <td>Model</td>
+                    <td>{{ guitar.specs.name_model }}</td>
+                </tr>
+                <tr>
+                    <td>Material</td>
+                    <td>{{ guitar.material }}</td>
+                </tr>
+                <tr>
+                    <td>Release year</td>
+                    <td>{{ guitar.date_sale }}</td>
+                </tr>
+                <tr>
+                    <td>Main hand</td>
+                    <td>Left/Right</td>
+                </tr>
+                <tr>
+                    <td>Size</td>
+                    <td>{{ guitar.size }} cm</td>
+                </tr>
+                <tr>
+                    <td>Weight</td>
+                    <td>{{ guitar.weight }} grams</td>
+                </tr>
+                <tr>
+                    <td>Price</td>
+                    <td>$ {{ guitar.price }} USD</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+{% endblock content %}

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Tulipan Store</title>
+
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        {% block styles %}
+        {% endblock styles %}
+
+        <!-- Static Files -->
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static '/css/main.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static '/users/css/style.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static '/users/css/signup.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static '/guitars/css/style.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static '/guitars/css/detail_guitar.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static '/payments/css/style.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static '/payments/css/checkout.css' %}">
+
+        <!-- FAVICON -->
+        <link rel="icon" href="{% static 'images/icon_guitar.png' %}" sizes="32x32" type="image/png">
+
+        <script type="text/javascript">
+
+            /*console.log('Cookie: ', document.cookie)*/
+
+            var user = "{{ request.user }}"
+            var userFlag = false
+            if(user.toLowerCase().includes("anonymous")){
+                userFlag = false;
+            }
+            else{
+                userFlag = true;
+            }
+            function getToken(name) {
+                let cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    const cookies = document.cookie.split(';');
+                    for (let i = 0; i < cookies.length; i++) {
+                        const cookie = cookies[i].trim();
+                        // Does this cookie string begin with the name we want?
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+            
+            function getCookie(name){
+                var cookieArr = document.cookie.split(";");
+
+                for(var i = 0; i < cookieArr.length; i++){
+                    var cookiePair = cookieArr[i].split("=");
+
+                    if (name == cookiePair[0].trim()){
+                        return decodeURIComponent(cookiePair[1]);
+                    }
+                }
+
+                return null;
+            }
+
+            var cart = JSON.parse(getCookie('cart'));
+            var fav = JSON.parse(getCookie('fav'));
+            var csrftoken = getToken('csrftoken');
+
+            if (cart == undefined){
+                cart = {};
+                console.log('Cart Created: ', cart);
+                document.cookie = 'cart = ' + JSON.stringify(cart) + ";domain =;path=/";
+            }
+            if (fav == undefined){
+                fav = {};
+                console.log('FAV Created: ', fav);
+                document.cookie = 'fav = ' + JSON.stringify(fav) + ";domain =;path=/";
+            }
+
+            console.log('User: ', user);
+            console.log('CSRFTOKEN: ', csrftoken);
+            console.log('Cart: ', cart);
+            console.log('favorites: ', fav);
+            
+        </script>
+
+    </head>
+    <body>
+        <header>
+            <!-- Navigate Bar -->
+            <nav class="container">
+                <div class="nav-menu">
+                    <input type="checkbox" name="cb-nav-responsive" id="cb-nav-responsive">
+                    <img id="nav-responsive" src="{% static 'images/menu-02.png' %}" alt="Menu del website">
+                </div>
+                <div class="nav-brand">
+                    <a class="navbar-brand" href="{% url 'guitars:index' %}">
+                        Tulipan Guitars
+                    </a>
+                </div>
+                <div class="nav-cart">
+                    <figure>
+                        <a href="{% url 'payments:cart' %}">
+                            <img id="cart-icon" src="{% static 'images/cart.png' %}" alt="Imagen del carrito de compras">
+                            <figcaption id="cart-total">
+                                {% if cartItems %}
+                                    {{ cartItems }}
+                                {% else %}
+                                    0
+                                {% endif %}
+                            </figcaption>
+                        </a>
+                    </figure>
+                </div>
+                <div id="menu-responsive" class="nav-menu-options hidden">
+                    <ul class="menu-general">
+                        <li><a href="{% url 'payments:history' %}">View order history</a></li>
+                        <li><a href="{% url 'guitars:favorites' %}">Manage favorites</a></li>
+                        <li>{{ user }}</li>
+                        {% if userFlag %}
+                            <li id="li-logout" class="nav-link active"><a href="{% url 'users:logout' %}">Logout</a></li>
+                        {% else %}
+                            <li id="li-login"><a href="{% url 'users:login' %}">Login</a></li>
+                            <li id="li-signup"><a href="{% url 'users:signup' %}">Create an account</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <div class="nav-searchbar">
+                    <div class="text">
+                        <input type="text" name="search" id="search">
+                    </div>
+                    <div class="lens">
+                        <img src="{% static 'images/icon-search.png' %}" alt="imagen lupa busqueda">
+                    </div>
+                </div>
+                <div class="nav-list">
+                    <ul>
+                        <li><a href="#">Pedals</a></li>
+                        <li><a href="#">Pics</a></li>
+                        <li><a href="#">Belts</a></li>
+                        <li><a href="#">Strings</a></li>
+                        <li><a href="#">Electric Guitar</a></li>
+                        <li><a href="#">Acoustic Guitar</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        
+        <!-- Content of WebPage -->
+        <main>
+            {% block content %}
+            {% endblock content %}
+        </main>
+        <!-- Content of Footer -->
+        <footer>
+            <section class="start-page">
+                <a href="">Start Page</a>
+            </section>
+            <section class="info">
+                <ul>
+                    <li><a href="">Home Page</a></li>
+                    <li><a href="">Your List</a></li>
+                    <li><a href="">Support</a></li>
+                    <li><a href="">Contact Us</a></li>
+                    <li><a href="">Your Account</a></li>
+                </ul>
+            </section>
+            <section class="idiom">
+                <ul>
+                    <li><a href="">o Español</a></li>
+                    <li><a href="">$ USD - dolar estadounidense</a></li>
+                    <li><a href="">Estados Unidos</a></li>
+                </ul>
+            </section>
+            <section class="signup">
+                <a href="">Are you a client? Login</a>
+            </section>
+            <section class="privacy">
+                <ul>
+                    <li><a href="">Condiciones de uso</a></li>
+                    <li><a href="">Aviso de Privacidad</a></li>
+                    <li><a href="">Anuncios basados en tus intereses</a></li>
+                </ul>
+            </section>
+        </footer>
+
+        <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+        <script type="text/javascript" src="{% static 'guitars/js/index.js' %}"></script>
+        <script type="text/javascript" src="{% static 'users/js/login.js' %}"></script>
+    </body>
+</html>

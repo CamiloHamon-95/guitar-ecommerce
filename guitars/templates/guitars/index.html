@@ -1,0 +1,80 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<section class="index-container">
+
+    <ul class="filter-guitars">
+
+        <li class="container-filter">
+
+            <div class="title-filter">
+                <label class="label-content" for="title-filter">Show/Hide Filter</label>  
+                <input class="cb" type="checkbox" id="title-filter">
+                <label class="label-switch" for="title-filter"></label>         
+            </div>
+            <div class="all-filter hidden" id="div-all-filter">
+                <label class="label-content" for="select-all">Select all</label>
+                <input class="cb" type="checkbox" id="select-all" checked>
+                <label class="label-switch" for="select-all"></label>
+            </div>
+
+            <ul class="options_brands hidden" id="ul_opt_brands">
+                {% for mybrand in list_brands %}
+                <li class="list-brand">
+                    <label class="label-content" for="brand-{{ mybrand.id_brand }}">{{ mybrand.name_company|capfirst }}</label>
+                    <input type="checkbox" class="cb cb-brand" id="brand-{{ mybrand.id_brand }}" checked> 
+                    <label class="label-switch" for="brand-{{ mybrand.id_brand }}"></label>
+
+                    <ul class="options_models" data-brand="brand-{{ mybrand.id_brand }}">
+                        <!-- aca va un hidden -->
+                        {% for mymodel in list_models %}
+                        {% if mybrand.id_brand == mymodel.id_fk_brand.id_brand %}
+                        <li class="list_model">
+                            <label class="label-content" for="model-{{ mymodel.id_model }}">{{ mymodel.name_model|capfirst }}</label>
+                            <input id="model-{{ mymodel.id_model }}" type="checkbox" class="cb cb-model"
+                            data-brand="brand-{{ mybrand.id_brand }}" checked>
+                            <label class="label-switch" for="model-{{ mymodel.id_model }}"></label>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+
+                </li>
+                {% endfor %}
+            </ul>
+
+        </li>
+
+    </ul>
+
+    <div class="guitar-container">
+        {% for guitar in list_guitars %}
+            <div class="container-unique-guitar" data-brand="brand-{{ guitar.specs.id_brand }}"
+                data-model="model-{{ guitar.specs.id_model }}">
+                <figure class="box">
+                    <img src="{{ guitar.images.first.imageURL }}" alt="Imagen de {{ guitar.name_guitar }}">
+                    <figcaption>
+                        {{ guitar.name_guitar }} <br><br>
+                        Price: <strong>${{ guitar.price|floatformat:2 }}</strong>
+                    </figcaption>
+                    <button class="btn-fav" data-action="add-fav" data-product="{{ guitar.id_guitar }}" data-value="false">
+                        <img src="{% static 'images/full-heart.png' %}" alt="Imagen agregar a favoritos">
+                    </button>
+                </figure>
+                <div class="box-element product">
+                    <button data-product="{{ guitar.id_guitar }}" data-action="add"
+                        class="btn btn-outline-secondary add-btn update-cart">
+                        Add to Cart
+                    </button>
+                    <a class="lnk-guitar" href="{% url 'guitars:detail_guitar' guitar.id_guitar %}">View</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+</section>
+
+
+
+{% endblock content %}

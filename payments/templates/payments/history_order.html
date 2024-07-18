@@ -1,0 +1,91 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+    <section class="history-order">
+        <h1><strong>ORDER HISTORY</strong></h1>
+        <hr size="8px" color="black" />
+        <br>
+        <div class="order-list">
+            {% for order in history_order %}
+                <div>
+                    <table class="table-data-history">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <strong class="title-history">
+                                        Id of Order:
+                                    </strong>
+                                </td>
+                                <td> {{ order.pk }} </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong class="title-history">
+                                        Date of Order:
+                                    </strong>
+                                </td>
+                                <td> {{ order.date_ordered }} </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong class="title-history">
+                                        Is complete?:
+                                    </strong>
+                                </td>
+                                <td> {{ order.complete }} </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong class="title-history">
+                                        Transaction of Order:
+                                    </strong>
+                                </td>
+                                <td> {{ order.transaction_id }} </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong class="title-history">
+                                        Total amount:
+                                    </strong>
+                                </td>
+                                <td> {{ order.get_cart_total }} </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong class="title-history">
+                                        Total Items:
+                                    </strong>
+                                </td>
+                                <td> {{ order.get_cart_items }} </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                    <table class="table-articles">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in order.orderitem_set.all %}
+                                <tr>
+                                    <td> {{ item.product }} </td>
+                                    <td> {{ item.quantity }} </td>
+                                    <td> {{ item.get_total }} </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <br>
+                    <!-- <hr size="8px" color="black" /> -->
+                    <br>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+        
+{% endblock content %}

@@ -1,0 +1,85 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+	<section class="main-container-cart">
+		<section class="container-cart">
+
+			<section class="buttons-cart">
+	
+				<a  
+				class="btn btn-index" 
+				href="{% url 'guitars:index' %}"
+				>
+					&#x2190; Continue Shopping
+				</a>
+				<a  
+				class="btn btn-checkout" 
+				href="{% url 'payments:checkout' %}"
+				>
+					Checkout
+				</a>
+		
+			</section>
+		
+			<section class="summary">
+				<div class="table-title">
+					<p>
+						Summary
+					</p>
+				</div>
+				<table class="minitable">
+					<tr>
+						<td>TOTAL ITEMS</td>
+						<td>{{ order.get_cart_items }}</td>
+					</tr>
+					<tr>
+						<td>TOTAL PRICE</td>
+						<td>${{ order.get_cart_total|floatformat:2 }}</td>
+					</tr>
+				</table>
+			</section>
+		
+			<table class="table-articles">
+				<thead>
+					<tr>
+						<th>Image</th>
+						<th>Item</th>
+						<th>Price</th>
+						<th>Quantity</th>
+						<th>Total</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for item in items %}
+					<tr>
+						<td><img class="row-image" src="{{ item.product.images.first.imageURL }}"></td>
+						<td class="name-item"><p>{{ item.product }}</p></td>
+						<td>${{item.product.price|floatformat:2}}</td>
+						<td align="center">
+							{{item.quantity}}
+							<div class="quantity">
+								
+								<img 
+									data-product="{{ item.product.id_guitar }}" 
+									data-action="add" 
+									class="chg-quantity update-cart" 
+									src="{% static  'images/arrow-up.png' %}"
+								>
+								<img 
+									data-product="{{ item.product.id_guitar }}" 
+									data-action="remove" 
+									class="chg-quantity update-cart" 
+									src="{% static  'images/arrow-down.png' %}"
+								>
+								
+							</div>
+						</td>
+						<td>${{item.get_total|floatformat:2}}</td>
+					</tr>
+				{%endfor%}
+				</tbody>
+			</table>
+		</section>
+	</section>
+
+{% endblock content %}

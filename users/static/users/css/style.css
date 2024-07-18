@@ -1,0 +1,126 @@
+main .container-login{
+  color:black;
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poopins';
+    padding: 2rem;
+}
+main .form-login {
+  position: relative;
+  max-width: 43rem;
+  width: 100%;
+  font-size: 1.4rem;
+  background-color: white;
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  padding: 3rem;
+}
+main .form-login a {
+  font-size: 1.4rem;
+  font-family: 'Poopins';
+  color: #4070f4;
+}
+
+main .form-login a:hover{
+  text-decoration: underline;
+}
+
+main .form-login .title{
+  position: relative;
+  font-family: 'Poopins-bold';
+  font-size: 2.7rem;
+}
+main .form-login .title::before{
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 0.3rem;
+  width: 3rem;
+  background-color: #4070f4;
+  border-radius: 2.5rem;
+}
+
+.form-login .fieldwrapper{
+  position: relative;
+  height: 5rem;
+  width: 100%;
+  margin-top: 3rem;
+  background-color: red;
+}
+
+.form-login .fieldwrapper input{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  padding: 0 3.5rem;
+  border: none;
+  outline: none;
+  border-bottom: 0.2rem solid #ccc;
+  border-top: 0.2rem solid transparent;
+}
+
+.form-login .fieldwrapper input:is(:focus, :valid){
+  border-bottom-color: #4070f4;
+}
+
+.form-login .fieldwrapper img{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2.3rem;
+}
+
+.form-login .fieldwrapper .main-ico{
+  left: 0;
+}
+
+.form-login .fieldwrapper .icon-eye{
+  right: 0;
+}
+
+main .form-login .checkbox-text{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+main .form-login .checkbox-content{
+  display: flex;
+  align-items: center;
+}
+
+main .form-login .checkbox-text input{
+  margin: 0 0.8rem -0.2rem 0.4rem;
+  accent-color: #4070f4;
+}
+main .form-login .button-login{
+  margin-top: 3.5rem;
+  height: 5rem;
+}
+
+main .form-login .button-login input{
+  width: 100%;
+  height: 100%;
+  font-size: 1.7rem;
+  font-weight: 50rem;
+  border: none;
+  border-radius: 0.5rem;
+  color: #fff;
+  letter-spacing: 0.2rem;
+  background-color: #4070f4;
+  cursor: pointer;
+  transition:  all 0.3s ease;
+}
+
+main .form-login .button-login input:hover{
+  background-color: #265df2;
+}
+
+main .form-login .signup{
+  margin-top: 3rem;
+  text-align: center;
+}

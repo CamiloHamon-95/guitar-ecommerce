@@ -1,0 +1,32 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<section class="main-registration">
+
+    <div class="container-registration">
+        <header>Registration</header>
+
+        <form action="{% url 'users:signup' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="fields">
+                {% for field in form %}
+                    <div class="fieldWrapper">
+                        {{ field.errors }}
+                        {{ field.label_tag }} {{ field }}
+                        {% if field.help_text %}
+                            <p class="help">{{ field.help_text|safe }}</p>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="box-btns">
+                <input class="btn" type="submit" value="Create User">
+                <a class="btn" href="{% url 'users:login' %}">Back to Login</a>
+            </div>
+        </form>
+    </div>
+
+</section>
+
+{% endblock content %}

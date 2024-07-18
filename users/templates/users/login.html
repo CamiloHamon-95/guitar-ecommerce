@@ -1,0 +1,50 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+    <section class="container-login">
+        <div class="form-login">
+            <span class="title">Login</span>
+            
+            {% if error %}
+                {{ error }}
+            {%  endif %}
+    
+            <!-- Variable which aim to static files route -->
+            {% get_static_prefix as STATIC_PREFIX %}
+    
+           <form action="{% url 'users:login' %}" method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="fieldwrapper">
+                        {{ field.errors }}
+                        {{ field }}
+                        {% if field.help_text %}
+                            <p class="help">{{ field.help_text|safe }}</p>
+                        {% endif %}
+                        <img class="main-ico" src="{{ STATIC_PREFIX }}users/images/{{ field.html_name }}.png" alt="{{field.html_name}} icon">
+                        {% if field.html_name == 'password' %}
+                            <img class="icon-eye" src="/static/users/images/eye.png" alt="eye-icon">
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                <div class="checkbox-text">
+                    <div class="checkbox-content">
+                        <input type="checkbox" name="logcheck" id="logcheck">
+                        <label for="logcheck" class="text">Remember me</label>
+                    </div>
+                    <a href="#" class="text">Forgot password?</a>
+                </div>
+                <div class="button-login">
+                    <input type="submit" value="Login Now">
+                </div>
+            </form>
+    
+            <div class="signup">
+                <span class="text">
+                    You don't have an account?
+                    <a href="{% url 'users:signup' %}">Create One</a>
+                </span>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

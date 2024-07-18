@@ -1,0 +1,102 @@
+.detail_guitar_container{
+    padding: 2rem;
+    background-color: #0E1C2A;
+    color: white;
+}
+.detail_guitar_container .title{
+    font-weight: bold;
+    font-size: 2rem;
+    padding: 1rem;
+}
+.collage{
+    height: 30rem;
+    max-width: 40rem;
+    width: 100%;
+    overflow: hidden;
+}
+.item-carrusel{
+    position: relative;
+    height: 100%;
+}
+.item-carrusel figure{
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+.item-carrusel figure img{
+    height: 100%;
+    object-fit: cover;
+}
+.item-carrusel div{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    top: 0;
+    height: 100%;
+    width: 100%;
+}
+/* ----------------- Table ----------------- */
+main .features table {
+	color: black;
+	border-collapse: collapse;
+    max-width: 50rem;
+	width: 100%;
+	min-width: 33rem;
+	border-radius: 0.5rem 0.5rem 0 0;
+	box-shadow: 0 0 2rem rgba(0, 0, 0, 0.15);
+	overflow: hidden;
+}
+main .table-articles .row-image{
+    width: 5.2rem;
+    height: 10rem;
+}
+main .features table thead tr{
+	background-color: #009879;
+	color: white;
+	text-align: left;
+	font-weight: bold;
+	height: 3rem;
+}
+main .features table tbody tr{
+	height: 2rem;
+}
+main .features table th, main .features table td{
+	padding: 0.5rem;
+}
+main .features table tbody tr {
+	border-bottom: 0.2rem solid #dddddd;
+}
+main .features table tbody tr:nth-of-type(odd) {
+	background-color: #D5F5E3;
+}
+main .features table tbody tr:nth-of-type(even) {
+	background-color: #f3f3f3;
+}
+main .features table tbody tr:last-of-type{
+	border-bottom: 0.2rem solid #009879;
+}
+/* ----------------- Botonera ----------------- */
+main .buttons-detail-guitar{
+    display: flex;
+    justify-content: space-between;
+}
+
+main .buttons-detail-guitar .btn{
+	padding: 0 0.5rem;
+	letter-spacing: 0.05rem;
+	color: black;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #F7DC6F;
+    height: 5rem;
+    border:0.5rem solid rgba(0, 0, 0, 0.15);
+    margin: 0.5rem;
+    cursor: pointer;
+}
+main .buttons-detail-guitar .btn:hover{
+	background-color: #808226;
+}
